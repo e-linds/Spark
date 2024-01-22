@@ -1,7 +1,9 @@
+import LoginModal from "./loginmodal.jsx"
+import SignupModal from "./signupmodal.jsx"
 
-function Opening() {
+function Opening({ stay, setStay, user, setUser}) {
     return(
-        <div class="grid">
+        <main class="grid" id="opening_page_container">
             <div class = "container">
                 <img src='./sparklogo.png' title="Spark Mindful Artistry"/>
             </div>
@@ -10,15 +12,12 @@ function Opening() {
                 <p>Our goal is to help you develop healthy practice and performance habits.</p>
                 <p>We're so glad you're here!</p>
                 <div class="grid">
-                        <button class="openingpagebutton">Login</button>
-                        <button class="openingpagebutton">Create New Account</button>
-                    </div>
+                        <LoginModal stay={stay} setStay={setStay} user={user} setUser={setUser}/>
+                        <SignupModal user={user} setUser={setUser}/>
+                </div>
             </div>
-        </div>
+        </main>
     )
-
-
-
 
 
 

@@ -24,17 +24,18 @@ def signup():
         try:
             data = request.get_json()
             new_user = User(
-                name = data["name"],
-                email = data["email"],
-                job = data["job"],
-                image_url = data["image_url"]
+                name = data.get("name"),
+                email = data.get("email"),
+                job = data.get("job"),
+                image_url = data.get("image_url")
             )
             new_user.password_hash = data["password"]
             db.session.add(new_user)
             db.session.commit()
             session["user_id"] = new_user.id
             return new_user.to_dict(), 201
-        except:
+        except Exception as e:
+            print(e)
             return {"error": "failure to sign up"}, 422
 
 
@@ -74,6 +75,18 @@ def logout():
             return {}, 204
 
         return {"error": "not logged in"}, 401
+    
+
+@app.route('/sessions', methods = ["GET"])
+def sessions():
+    sessions = Session.query.all()
+
+    if request.method == "GET":
+        all_sessions = []
+        for each in sessions:
+            all_sessions.append(each.to_dict(rules=('-users', '-categories',)))
+        return all_sessions, 200
+
 
 
     

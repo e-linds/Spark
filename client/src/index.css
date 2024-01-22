@@ -3,23 +3,68 @@
 }
 
 body {
-  margin-top: 50px;
-  /* margin-left:15px; */
-  margin-right: 15px;
-  max-width: 1200px;
+  padding: 20px;
+  max-width: 1280px;
   --primary: #fed8b1;
   --secondary: #ff8b3d;
   font-family: 'PT Sans', sans-serif;
   font-family: 'Roboto Mono', monospace;
 }
 
-.openingpagebutton {
+button {
   color: #ff8b3d;
+
 }
 
-.openingpagebutton:hover {
+button:hover {
   color: white;
   background: #ff8b3d
+}
+
+
+#opening_page_container {
+  padding: 100px
+
+}
+
+
+#loginmodal {
+  font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto Mono', monospace
+  /* width: 400px; */
+
+}
+
+#loginmodal * {
+  margin-right: 30px;
+  margin-left: 15px;
+  margin-top: 15px;
+  font-size: 15px
+}
+
+#header-details {
+  display: flex;
+  justify-content: space-around
+
+}
+
+#logoutbtn {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 150px;
+  height: 50px;
+
+}
+
+#sessionblocks-container {
+  height: 200px;
+  display: flex;
+  justify-content: space-around
+}
+
+#sessionblock {
+  width: 200px
 }
 
 

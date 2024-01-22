@@ -12,7 +12,7 @@ class User(db.Model, SerializerMixin):
 
     id = Column(Integer, primary_key = True)
     name = Column(String, nullable = False)
-    _password_hash = Column(String)
+    _password_hash = Column(String, nullable = False)
     email = Column(String, nullable = False, unique = True)
     job = Column(String)
     image_url = Column(String)
@@ -20,6 +20,9 @@ class User(db.Model, SerializerMixin):
     sessions = relationship("UserSession", back_populates = "user", cascade = "all, delete")
 
     serialize_rules = ('-sessions.user',)
+
+    def __repr__(self):
+        return f"Name: {self.name}, email: {self.email}, id: {self.id}"
 
     @validates("email")
     def validate_email(self, key, email):
@@ -97,6 +100,7 @@ class UserSession(db.Model, SerializerMixin):
     user = relationship("User", back_populates = "sessions")
     session = relationship("Session", back_populates = "users")
 
+    serialize_rules = ('-user.sessions', 'session.users',)
 
 
 class Practitioner(db.Model, SerializerMixin):

@@ -23,7 +23,7 @@ def create_users():
         db.session.commit()
 
 def create_sessions():
-    for each in range(25):
+    for each in range(10):
         new_sesh = Session(
             title = fake.word(),
             link = fake.dga(),
@@ -56,7 +56,7 @@ def create_categories():
 def create_sesh_cate():
     for each in range(25):
         new = SessionCategory(
-            session_id = fake.random_int(min=0, max=25),
+            session_id = fake.random_int(min=0, max=10),
             category_id = fake.random_int(min=0, max=10)
         )
         db.session.add(new)
@@ -67,7 +67,7 @@ def create_user_sesh():
     for each in range(20):
         new = UserSession(
             user_id = fake.random_int(min=0, max=10),
-            session_id = fake.random_int(min=0, max=25)
+            session_id = fake.random_int(min=0, max=10)
         )
         db.session.add(new)
         db.session.commit()

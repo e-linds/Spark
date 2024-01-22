@@ -18,7 +18,7 @@ def index():
     return '<h1>Project Server</h1>'
 
 
-@app.route('/signup', methods = "POST")
+@app.route('/signup', methods = ["POST"])
 def signup():
     if request.method == "POST":
         try:

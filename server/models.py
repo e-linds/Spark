@@ -1,10 +1,11 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import Column, String, Integer, ForeignKey, MetaData
 from sqlalchemy.orm import validates, relationship
 from flask_sqlalchemy import SQLAlchemy
 
-from config import db
+from config import db, bcrypt
 
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
@@ -19,6 +20,29 @@ class User(db.Model, SerializerMixin):
     sessions = relationship("UserSession", back_populates = "user", cascade = "all, delete")
 
     serialize_rules = ('-sessions.user',)
+
+    @validates("email")
+    def validate_email(self, key, email):
+        if "@" not in email:
+            return ValueError("must input valid email")
+        else:
+            return email
+
+    @hybrid_property
+    def password_hash(self):
+        raise AttributeError("Password hash may not be accessed")
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(
+            password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(
+            self._password_hash, password.encode('utf-8')
+        )
 
 
 

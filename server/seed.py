@@ -90,7 +90,7 @@ if __name__ == '__main__':
         UserSession.query.delete()
 
         print("Starting seed...")
-        create_users()
+        # create_users()
         create_sessions()
         create_practitioners()
         create_categories()

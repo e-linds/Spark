@@ -1,3 +1,31 @@
+:root {
+  --primary: #fb8c00;
+}
+
+body {
+  margin-top: 50px;
+  /* margin-left:15px; */
+  margin-right: 15px;
+  max-width: 1200px;
+  --primary: #fed8b1;
+  --secondary: #ff8b3d;
+  font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.openingpagebutton {
+  color: #ff8b3d;
+}
+
+.openingpagebutton:hover {
+  color: white;
+  background: #ff8b3d
+}
+
+
+
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

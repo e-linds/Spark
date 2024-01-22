@@ -14,6 +14,7 @@ class User(db.Model, SerializerMixin):
     _password_hash = Column(String)
     email = Column(String, nullable = False, unique = True)
     job = Column(String)
+    image_url = Column(String)
 
     sessions = relationship("UserSession", back_populates = "user", cascade = "all, delete")
 
@@ -38,6 +39,7 @@ class Session(db.Model, SerializerMixin):
     id = Column(Integer, primary_key = True)
     title = Column(String)
     link = Column(String)
+    text = Column(String)
     practitioner_id = Column(Integer, ForeignKey("practitioners.id"))
 
     categories = relationship("SessionCategory", back_populates = "session", cascade = "all, delete")

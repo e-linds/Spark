@@ -96,6 +96,15 @@ def practitioners():
         for each in practs:
             all_practs.append(each.to_dict())
         return all_practs, 200
+    
+
+
+@app.route('/sessions/<int:id>', methods = ["GET"])
+def session_by_id(id):
+    session = Session.query.filter(Session.id == id).first()
+
+    if request.method == "GET":
+        return session.to_dict(rules=('-users', '-categories',)), 200
 
 
 

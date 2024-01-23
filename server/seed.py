@@ -27,7 +27,8 @@ def create_sessions():
         new_sesh = Session(
             title = f"{fake.word()} {fake.word()} {fake.word()}",
             link = "https://evfgxracv24.exactdn.com/wp-content/uploads/2021/02/atlanta-symphony-orchestra_002-1656x1080.jpg?lossy=0",
-            practitioner_id = fake.random_int(min=0, max=10)
+            practitioner_id = fake.random_int(min=0, max=10),
+            text = fake.paragraph()
         )
         db.session.add(new_sesh)
 

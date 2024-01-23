@@ -1,20 +1,17 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 import SessionBlock from "./SessionBlock"
+import SessionPage from './SessionPage.jsx'
 
 
-function Library({ sessions, setSessions, practitioners, setPractitioners }) {
 
-    function find_pract(input) {
-        for (const each of practitioners) {
-            if (each.id === input) {
-                return each.name
-            }
-        }}
+function Library({ sessions, setSessions, practitioners, setPractitioners, setCurrentSession, findPract }) {
+    
 
 
     
     return(
-       
+       <>
         <main id="library-container">
             <h2>Featured Sessions</h2>
             <div id="sessionblocks-container">
@@ -24,7 +21,9 @@ function Library({ sessions, setSessions, practitioners, setPractitioners }) {
                         id={each.id}
                         title={each.title}
                         link={each.link}
-                        practitioner={find_pract(each.practitioner_id)}
+                        self={each}
+                        practitioner={findPract(each.practitioner_id)}
+                        setCurrentSession={setCurrentSession}
                     />   
                 })
                 :
@@ -33,14 +32,11 @@ function Library({ sessions, setSessions, practitioners, setPractitioners }) {
             </div>
             <h2>Featured Practitioners</h2>
 
+
         </main>
-
-
+        </>
 
     )
-
-
-
 }
 
 export default Library

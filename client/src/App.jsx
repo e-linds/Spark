@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 // import { Link } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Opening from './opening.jsx'
 import Library from './Library.jsx'
+import Header from './Header.jsx'
+import SessionPage from './SessionPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +16,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [sessions, setSessions] = useState([])
   const [practitioners, setPractitioners] = useState([])
+  const [currentSession, setCurrentSession] = useState(null)
 
   useEffect(()=>{
     fetch('/api/check_session')
@@ -37,37 +41,49 @@ function App() {
     .then(r => r.json())
   .then(data => setPractitioners(data))  }, [])
 
-   
-  
-  
-  function handleClick() {
+  function findPract(input) {
+    for (const each of practitioners) {
+        if (each.id === input) {
+            return each.name
+        }
+    }}
 
-          fetch("/api/logout", {
-            method: "DELETE"
-        })
-        .then(r => setUser(null)
-        )}
+
+  
 
 
   return (
-    <div>
-      {user ? 
+    
+
+    <BrowserRouter>
+    { user ? 
       <>
-      <header class="grid">
-      <h1>Welcome, {user.name}</h1> 
-      <div id="header-details">
-          <a href="/library">Library</a>
-          <a>My Sparks</a>
-          <a>My Profile</a>
-          <button id="logoutbtn" onClick={handleClick}>Logout</button>
-        </div>
-      </header>
-      <Library sessions={sessions} setSessions={setSessions} practitioners={practitioners} setPractitioners={setPractitioners}/>
+      <Header user={user} setUser={setUser}/>
+      <Routes>
+            <Route path="/library" element={<Library 
+            sessions={sessions} 
+            setSessions={setSessions} 
+            practitioners={practitioners} 
+            setPractitioners={setPractitioners} 
+            currentSession={currentSession} 
+            setCurrentSession={setCurrentSession}
+            findPract={findPract}/>}/>
+            <Route path="/sessions">
+              <Route path=":sessionid" element={<SessionPage sessions={sessions} setSessions={setSessions} currentSession={currentSession} findPract={findPract}/>}/>
+            </Route>
+      </Routes> 
       </>
-      : 
-      <Opening stay={stay} setStay={setStay} user={user} setUser={setUser} />
-      }
-    </div>
+      :
+      <Routes>
+            <Route path="/" element={<Opening stay={stay} setStay={setStay} user={user} setUser={setUser}/>}/>
+      </Routes>  
+      } 
+    </BrowserRouter>
+
+
+
+
+
   )
 }
 

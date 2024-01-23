@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState, useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
@@ -26,13 +27,17 @@ function App() {
     .then(data => setUser(data))
   },[])
 
-  // useEffect(() => {
-  //   fetch('/api/sessions')
-  //   .then(r => r.json())
-  // .then(data => setSessions(data))  })
+  useEffect(() => {
+    fetch('/api/sessions')
+    .then(r => r.json())
+  .then(data => setSessions(data))  }, [])
 
-  
-  
+  useEffect(() => {
+    fetch('/api/practitioners')
+    .then(r => r.json())
+  .then(data => setPractitioners(data))  }, [])
+
+   
   
   
   function handleClick() {
@@ -57,7 +62,7 @@ function App() {
           <button id="logoutbtn" onClick={handleClick}>Logout</button>
         </div>
       </header>
-      <Library sessions={sessions} setSessions={setSessions}/>
+      <Library sessions={sessions} setSessions={setSessions} practitioners={practitioners} setPractitioners={setPractitioners}/>
       </>
       : 
       <Opening stay={stay} setStay={setStay} user={user} setUser={setUser} />

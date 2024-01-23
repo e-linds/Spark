@@ -86,6 +86,16 @@ def sessions():
         for each in sessions:
             all_sessions.append(each.to_dict(rules=('-users', '-categories',)))
         return all_sessions, 200
+    
+@app.route('/practitioners', methods = ["GET"])
+def practitioners():
+    practs = Practitioner.query.all()
+
+    if request.method == "GET":
+        all_practs = []
+        for each in practs:
+            all_practs.append(each.to_dict())
+        return all_practs, 200
 
 
 

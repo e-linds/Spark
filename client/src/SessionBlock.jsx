@@ -1,8 +1,17 @@
-function SessionBlock({ title, practitioner }) {
+import React from 'react'
 
+
+function SessionBlock({ title, link, practitioner }) {
+
+    const articleStyle = {
+        backgroundImage: `${link}`,
+        opacity: .5,
+        borderRadius: "2px"
+
+    }
+    
     return(
-        <article id="sessionblock">
-            {/* <img src={image_url ? image_url: "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"}/> */}
+        <article id="sessionblock" class="section" style={articleStyle}>
             <p>{title}: {practitioner}</p>
         </article>
     )

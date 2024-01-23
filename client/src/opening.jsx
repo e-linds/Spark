@@ -1,3 +1,4 @@
+import React from 'react'
 import LoginModal from "./loginmodal.jsx"
 import SignupModal from "./signupmodal.jsx"
 

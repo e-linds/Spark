@@ -4,22 +4,24 @@ import { useParams } from 'react-router-dom';
 
 
 
-function SessionPage({ currentSession, findPract }) {
+function SessionPage({ currentSession, setCurrentSession, findPract }) {
 
-    let { sessionid } = useParams();
+        let { sessionid } = useParams();
 
         useEffect(() => {
             
-            fetch(`/api/sessions/${currentSession.id ? currentSession.id : useParams()}`)
+            fetch(`/api/sessions/${ sessionid }`)
             .then(r => r.json())
-            .then(data => console.log(data))
+            .then(data => setCurrentSession(data))
             }, []
     )
 
-   
-    
-    console.log(useParams())
-        
+    function getVidId(input) {
+        const linkArray = input.split('')
+        const indexToSplit = linkArray.findIndex((item) => item === "=")
+        const vidId = (linkArray.slice(indexToSplit + 1)).join('')
+        return vidId
+    }
 
 
     const options = {
@@ -38,9 +40,7 @@ function SessionPage({ currentSession, findPract }) {
         <>
         <h3>{currentSession.title} with {findPract(currentSession.practitioner_id)}</h3>
         <main id="sessionpage-container" class="grid">
-            {/* <img src={currentSession.link}/> */}
-            <YouTube videoId="CVW_IE1nsKE" options={options}/>
-            
+            <YouTube videoId={`${getVidId(currentSession.link)}`} options={options}/>
             <p>{currentSession.text}</p>
         </main>
         </>

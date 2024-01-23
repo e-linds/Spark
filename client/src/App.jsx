@@ -69,7 +69,7 @@ function App() {
             setCurrentSession={setCurrentSession}
             findPract={findPract}/>}/>
             <Route path="/sessions">
-              <Route path=":sessionid" element={<SessionPage sessions={sessions} setSessions={setSessions} currentSession={currentSession} findPract={findPract}/>}/>
+              <Route path=":sessionid" element={<SessionPage sessions={sessions} setSessions={setSessions} currentSession={currentSession} setCurrentSession={setCurrentSession} findPract={findPract}/>}/>
             </Route>
       </Routes> 
       </>

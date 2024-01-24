@@ -24,7 +24,7 @@ function Header({ user, setUser }) {
       <div id="header-details">
           <Link to="/library">Library</Link>
           <Link to="/mysparks">My Sparks</Link>
-          <Link to="/myprofile">My Profile</Link>
+          <Link to="/users/">My Profile</Link>
           <button id="logoutbtn" onClick={handleClick}>Logout</button>
       </div>
     </header>

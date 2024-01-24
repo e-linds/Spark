@@ -4,7 +4,7 @@
 
 body {
   padding: 20px;
-  max-width: 1280px;
+  max-width: 1600px;
   --primary: #fed8b1;
   --secondary: #ff8b3d;
   font-family: 'PT Sans', sans-serif;
@@ -101,6 +101,70 @@ button:hover {
   /* color: white */
 
 }
+
+#profilepage-container {
+  display: grid;
+  grid-template-columns: 70% 20%
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#ellipsesbtn {
+  background: white;
+  width: 100px;
+  height: 50px;
+  font-size: 70px;
+  padding: 0;
+  border: none;
+  color: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center
+
+}
+
+#ellipsesbtn:hover {
+  color: var(--secondary)
+}
+
+#ellipsesbtn:hover {
+  border: none
+}
+
+.dropdown-content {
+  display: none;
+  background-color:white; 
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+
+}
+
+.dropdown-content span {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content span:hover {background-color: #ddd;}
+.dropdown:hover .dropdown-content {display: block;}
+
+.editprofile-form input {
+  height: 40px;
+  width: 40%
+
+}
+
+
+
+
+
+
+
 /* 
 #sessionblock img {
   min-width: 100%

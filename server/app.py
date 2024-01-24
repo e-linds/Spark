@@ -108,13 +108,47 @@ def categories():
         return all_categs, 200
     
 
+# @app.route('/session/categories', methods = ["GET"])
+# def session_categories():
+#     sessioncategs = SessionCategory.query.all()
+
+#     if request.method == "GET":
+#         all_sessioncategs = []
+#         for each in sessioncategs:
+#             all_sessioncategs.append(each.to_dict())
+#         return all_sessioncategs, 200
+
+
+    
+
 
 @app.route('/sessions/<int:id>', methods = ["GET"])
 def session_by_id(id):
     session = Session.query.filter(Session.id == id).first()
 
     if request.method == "GET":
-        return session.to_dict(rules=('-users', '-categories',)), 200
+        return session.to_dict(), 200
+    
+
+@app.route('/users/<int:id>', methods = ["GET", "PATCH", "DELETE"])
+def user_by_id(id):
+    user = User.query.filter(User.id == id).first()
+
+    if request.method == "GET":
+        return user.to_dict(), 200
+    
+    if request.method == "PATCH":
+        try:
+            json_dict = request.get_json()
+            for attr in json_dict:
+                setattr(user, attr, json_dict.get(attr))
+            db.session.add(user)
+            db.session.commit()
+            return user.to_dict(), 200
+        except:
+            return {"error": "unable to edit"}, 304
+    
+
 
 
 

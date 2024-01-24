@@ -2,13 +2,12 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 // import { Link } from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Opening from './opening.jsx'
 import Library from './Library.jsx'
 import Header from './Header.jsx'
-import SessionPage from './SessionPage'
+import SessionPage from './SessionPage.jsx'
+import MyProfile from './MyProfile.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -68,17 +67,15 @@ function App() {
       <Routes>
             <Route path="/library" element={<Library 
             sessions={sessions} 
-            setSessions={setSessions} 
             practitioners={practitioners} 
-            setPractitioners={setPractitioners} 
             categories={categories}
-            setCategories={setCategories}
             currentSession={currentSession} 
             setCurrentSession={setCurrentSession}
             findPract={findPract}/>}/>
             <Route path="/sessions">
               <Route path=":sessionid" element={<SessionPage sessions={sessions} setSessions={setSessions} currentSession={currentSession} setCurrentSession={setCurrentSession} findPract={findPract}/>}/>
             </Route>
+            <Route path="/users" element={<MyProfile user={user} setUser={setUser}/>}/>
       </Routes> 
       </>
       :

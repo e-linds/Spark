@@ -26,7 +26,7 @@ def create_sessions():
     for each in range(10):
         new_sesh = Session(
             title = f"{fake.word()} {fake.word()} {fake.word()}",
-            link = "https://www.youtube.com/watch?v=CeT_ZAp6juw",
+            link = "https://www.youtube.com/watch?v=NNL2klXs3tc",
             practitioner_id = fake.random_int(min=0, max=10),
             text = fake.paragraph()
         )

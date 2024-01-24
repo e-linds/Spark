@@ -13,10 +13,11 @@ from models import db, Session, Category, SessionCategory, User, Practitioner, U
 
 
 def create_users():
-    for each in range(5):
+    for each in range(3):
         new_user = User(
             name = fake.name(),
             email = fake.email(),
+            _password_hash = "password",
             job = fake.job()
         )
         db.session.add(new_user)
@@ -67,7 +68,7 @@ def create_sesh_cate():
 def create_user_sesh():
     for each in range(20):
         new = UserSession(
-            user_id = fake.random_int(min=1, max=10),
+            user_id = fake.random_int(min=1, max=3),
             session_id = fake.random_int(min=1, max=10)
         )
         db.session.add(new)
@@ -91,7 +92,7 @@ if __name__ == '__main__':
         UserSession.query.delete()
 
         print("Starting seed...")
-        # create_users()
+        create_users()
         create_sessions()
         create_practitioners()
         create_categories()

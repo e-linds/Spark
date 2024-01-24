@@ -8,6 +8,7 @@ import Library from './Library.jsx'
 import Header from './Header.jsx'
 import SessionPage from './SessionPage.jsx'
 import MyProfile from './MyProfile.jsx'
+import MySparks from './MySparks.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +18,7 @@ function App() {
   const [practitioners, setPractitioners] = useState([])
   const [categories, setCategories] = useState([])
   const [currentSession, setCurrentSession] = useState(null)
+  const [currentTab, setCurrentTab] = useState("library")
 
   useEffect(()=>{
     fetch('/api/check_session')
@@ -63,7 +65,7 @@ function App() {
     <BrowserRouter>
     { user ? 
       <>
-      <Header user={user} setUser={setUser}/>
+      <Header user={user} setUser={setUser} setCurrentTab={setCurrentTab}/>
       <Routes>
             <Route path="/library" element={<Library 
             sessions={sessions} 
@@ -75,12 +77,14 @@ function App() {
             <Route path="/sessions">
               <Route path=":sessionid" element={<SessionPage sessions={sessions} setSessions={setSessions} currentSession={currentSession} setCurrentSession={setCurrentSession} findPract={findPract}/>}/>
             </Route>
+            <Route path="/mysparks" element={<MySparks user={user} sessions={sessions} findPract={findPract}/>}/>
             <Route path="/users" element={<MyProfile user={user} setUser={setUser}/>}/>
+
       </Routes> 
       </>
       :
       <Routes>
-            <Route path="/" element={<Opening stay={stay} setStay={setStay} user={user} setUser={setUser}/>}/>
+            <Route path="/library" element={<Opening stay={stay} setStay={setStay} user={user} setUser={setUser}/>}/>
       </Routes>  
       } 
     </BrowserRouter>

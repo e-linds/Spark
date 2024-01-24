@@ -1,6 +1,6 @@
 import React from 'react'
-import LoginModal from "./loginmodal.jsx"
-import SignupModal from "./signupmodal.jsx"
+import LoginModal from "./LoginModal.jsx"
+import SignupModal from "./SignupModal.jsx"
 
 function Opening({ stay, setStay, user, setUser}) {
     return(

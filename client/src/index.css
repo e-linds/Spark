@@ -4,6 +4,7 @@
 
 body {
   padding: 20px;
+  margin-left: 20px;
   max-width: 1600px;
   --primary: #fed8b1;
   --secondary: #ff8b3d;
@@ -37,15 +38,32 @@ button:hover {
 
 #loginmodal * {
   margin-right: 30px;
-  margin-left: 15px;
+  /* margin-left: 15px; */
   margin-top: 15px;
   font-size: 15px
+}
+
+#fullheader {
+  display: grid;
+  grid-template-columns: 2fr 3.5fr;
+  column-gap: 10px
 }
 
 #header-details {
   display: flex;
   justify-content: space-around
 
+}
+
+.headerlinks {
+  height: 30px
+}
+
+#headerlogo {
+  height: 180px;
+  margin-left: 40px;
+  margin-bottom: 50px;
+  min-width: 200px
 }
 
 #logoutbtn {
@@ -75,7 +93,7 @@ button:hover {
 
 }
 
-#sessionblocks-container {
+.sessionblocks-container {
   display: flex;
   height: 350px;
   justify-content: left;

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import DeleteUserModal from './DeleteUserModal.jsx'
 
 
 function MyProfile({ user, setUser }) {
@@ -76,7 +77,7 @@ function MyProfile({ user, setUser }) {
                 <button id="ellipsesbtn">&#8230;</button>
                 <div className="dropdown-content">
                     <span onClick={() => handleClick()}>Edit Profile</span>
-                    <span>Delete Profile</span>
+                    <DeleteUserModal user={user} setUser={setUser}/>
                     <span>Go to My Sparks</span>
                 </div>
             </div>

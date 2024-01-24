@@ -84,7 +84,7 @@ def sessions():
     if request.method == "GET":
         all_sessions = []
         for each in sessions:
-            all_sessions.append(each.to_dict(rules=('-users', )))
+            all_sessions.append(each.to_dict())
         return all_sessions, 200
     
 @app.route('/practitioners', methods = ["GET"])
@@ -107,20 +107,6 @@ def categories():
             all_categs.append(each.to_dict())
         return all_categs, 200
     
-
-# @app.route('/session/categories', methods = ["GET"])
-# def session_categories():
-#     sessioncategs = SessionCategory.query.all()
-
-#     if request.method == "GET":
-#         all_sessioncategs = []
-#         for each in sessioncategs:
-#             all_sessioncategs.append(each.to_dict())
-#         return all_sessioncategs, 200
-
-
-    
-
 
 @app.route('/sessions/<int:id>', methods = ["GET"])
 def session_by_id(id):
@@ -148,6 +134,11 @@ def user_by_id(id):
         except:
             return {"error": "unable to edit"}, 304
         
+    if request.method == "DELETE":
+        db.session.delete(user)
+        db.session.commit()
+        return {}, 204
+        
 @app.route('/sessions/<int:id>/categories', methods = ["GET"])
 def get_session_categories(id):
     # session = Session.query.filter(Session.id == id).first()
@@ -170,24 +161,6 @@ def get_session_categories(id):
         return final_list, 200
     
 
-@app.route('/categories/<int:id>/sessions', methods = ["GET"])
-def get_category_sessions(id):
-    categ_sesh_list = SessionCategory.query.filter(SessionCategory.category_id == id).all()
-    print(categ_sesh_list)
-
-    if request.method == "GET":
-        sessions = []
-        for each in categ_sesh_list:
-            sessions.append(each.session_id)
-        sesh_id_list = set(sessions)
-        sesh_obj_list = []
-        for each in sesh_id_list:
-            session = Session.query.filter(Session.id == each).first()
-            sesh_obj_list.append(session)
-        final_list = []
-        for each in sesh_obj_list:
-            final_list.append(each.to_dict('-users',))
-        return final_list, 200
 
 
     

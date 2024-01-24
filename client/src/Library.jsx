@@ -89,7 +89,7 @@ function Library({ sessions, practitioners, setCurrentSession, findPract, catego
                     })}
                 </div>
             </div>
-            <div id="sessionblocks-container">
+            <div className="sessionblocks-container">
                 {displaySessions ? displaySessions.map((each) => {
                     return <SessionBlock
                         key={each.id}

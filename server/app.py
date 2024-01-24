@@ -97,6 +97,16 @@ def practitioners():
             all_practs.append(each.to_dict())
         return all_practs, 200
     
+@app.route('/categories', methods = ["GET"])
+def categories():
+    categs = Category.query.all()
+
+    if request.method == "GET":
+        all_categs = []
+        for each in categs:
+            all_categs.append(each.to_dict())
+        return all_categs, 200
+    
 
 
 @app.route('/sessions/<int:id>', methods = ["GET"])

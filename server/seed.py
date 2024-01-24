@@ -44,7 +44,7 @@ def create_practitioners():
 
 
 def create_categories():
-    for each in range(10):
+    for each in range(5):
         new_cate = Category(
             name = fake.word()
         )
@@ -58,7 +58,7 @@ def create_sesh_cate():
     for each in range(25):
         new = SessionCategory(
             session_id = fake.random_int(min=0, max=10),
-            category_id = fake.random_int(min=0, max=10)
+            category_id = fake.random_int(min=0, max=5)
         )
         db.session.add(new)
         db.session.commit()

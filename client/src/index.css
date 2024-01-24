@@ -57,6 +57,25 @@ button:hover {
 
 }
 
+#librarysessions-title {
+  display: grid;
+  grid-template-columns: 1fr 2fr
+}
+
+#sortbuttons-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center
+}
+
+#categorybtn {
+  font-size: 15px;
+  height: 30px;
+  max-width: 120px;
+  padding: 0px
+
+}
+
 #sessionblocks-container {
   display: flex;
   height: 350px;

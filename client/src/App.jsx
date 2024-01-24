@@ -16,6 +16,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [sessions, setSessions] = useState([])
   const [practitioners, setPractitioners] = useState([])
+  const [categories, setCategories] = useState([])
   const [currentSession, setCurrentSession] = useState(null)
 
   useEffect(()=>{
@@ -41,6 +42,11 @@ function App() {
     .then(r => r.json())
   .then(data => setPractitioners(data))  }, [])
 
+  useEffect(() => {
+    fetch('/api/categories')
+    .then(r => r.json())
+  .then(data => setCategories(data))  }, [])
+
   function findPract(input) {
     for (const each of practitioners) {
         if (each.id === input) {
@@ -65,6 +71,8 @@ function App() {
             setSessions={setSessions} 
             practitioners={practitioners} 
             setPractitioners={setPractitioners} 
+            categories={categories}
+            setCategories={setCategories}
             currentSession={currentSession} 
             setCurrentSession={setCurrentSession}
             findPract={findPract}/>}/>

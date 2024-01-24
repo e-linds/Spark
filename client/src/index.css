@@ -108,15 +108,19 @@ button:hover {
   height: 250px;
   margin-right: 20px;
   vertical-align: baseline;
-  border-radius: 6px
+  border-radius: 6px;
 }
-
 
 
 #sessionblock p {
   text-wrap: wrap;
-  /* color: white */
+  color: #08769b;
+  
 
+}
+
+#sessionblock img {
+  opacity: .5
 }
 
 #sessionpage-container {

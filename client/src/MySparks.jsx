@@ -2,7 +2,7 @@ import { useInRouterContext } from 'react-router-dom'
 import SessionBlock from './SessionBlock.jsx'
 import { useEffect, useState } from 'react'
 
-function MySparks({ sessions, findPract, user }) {
+function MySparks({ sessions, findPract, user, getVidId }) {
     const [displaySessions, setDisplaySessions] = useState([])
 
 
@@ -43,6 +43,7 @@ useEffect(() => {
                             link={each.link}
                             self={each}
                             practitioner={findPract(each.practitioner_id)}
+                            getVidId={getVidId}
                         />   
                     })}
                     </div>

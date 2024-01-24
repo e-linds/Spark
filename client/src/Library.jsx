@@ -5,50 +5,37 @@ import SortButton from './SortButton.jsx'
 
 
 
-function Library({ sessions, practitioners, setCurrentSession, findPract, categories }) {
+function Library({ sessions, practitioners, setCurrentSession, findPract, categories, getVidId }) {
     const [sortCategories, setSortCategories] = useState([])
     const [displaySessions, setDisplaySessions] = useState(sessions)
-
-
 
 
     useEffect(() => {
         setDisplaySessions(sessions)
     }, [])
 
-    
-
-
     function buttonChange(input) {
-
         let array = sortCategories
 
         if (array.includes(input)) {
 
             const indexToRemove = array.indexOf(input)
-            array.splice(indexToRemove, 1)
-            
+            array.splice(indexToRemove, 1) 
             setSortCategories(array)
-        
-            
+       
         } else if (array.includes(input) === false) {
 
             array.push(input)
             setSortCategories(array)
-        
         }
         filterSessions()
     }
 
         
 
-
-
     function filterSessions() {
        
-
         let array = sortCategories
-
         let sessionfilter = sessions.filter((each) => {
 
             for (const categ in each.categories) {
@@ -60,22 +47,18 @@ function Library({ sessions, practitioners, setCurrentSession, findPract, catego
             return false
     
         })
-        console.log(sessionfilter)
         if (sessionfilter.length > 0) {
             setDisplaySessions(sessionfilter)
         } else {
             setDisplaySessions(sessions)
-        }
-    
+        }}
 
-    }
-
-    
+        
     return(
        <>
         <main id="library-container">
             <div id="librarysessions-title">
-                <h2>Featured Sessions</h2>
+                <h2>All Sessions</h2>
                 
                 <div id="sortbuttons-container">
                     <p>Sort By:</p>
@@ -99,13 +82,14 @@ function Library({ sessions, practitioners, setCurrentSession, findPract, catego
                         self={each}
                         practitioner={findPract(each.practitioner_id)}
                         setCurrentSession={setCurrentSession}
+                        getVidId={getVidId}
                     />   
                 })
                 :
                 <p>no sessions to display</p>
             }
             </div>
-            <h2>Featured Practitioners</h2>
+            <h2>All Practitioners</h2>
 
 
         </main>

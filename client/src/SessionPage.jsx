@@ -4,8 +4,11 @@ import { useParams } from 'react-router-dom';
 
 
 
-function SessionPage({ currentSession, setCurrentSession, findPract }) {
+function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, user }) {
     const [sessionCategories, setSessionCategories] = useState([])
+    const [inMySparks, setInMySparks] = useState(false)
+
+    
 
         let { sessionid } = useParams();
 
@@ -21,19 +24,11 @@ function SessionPage({ currentSession, setCurrentSession, findPract }) {
         fetch(`/api/sessions/${ sessionid }/categories`)
         .then(r => r.json())
         .then(data => {
-            console.log(data)
             setSessionCategories(data)
         })
     }, [])
 
-    function getVidId(input) {
-        const linkArray = input.split('')
-        const indexToSplit = linkArray.findIndex((item) => item === "=")
-        const vidId = (linkArray.slice(indexToSplit + 1)).join('')
-        return vidId
-    }
-
-
+    
     const options = {
         height: '390',
 
@@ -42,7 +37,54 @@ function SessionPage({ currentSession, setCurrentSession, findPract }) {
           controls: 1,
         }}
 
+
     
+    
+    function addtoMySparks() {
+        // add usersession instance - post
+        setInMySparks(true)
+        
+    }
+
+
+    function removefromMySparks() {
+        //remove user session instance - delete
+        setInMySparks(false)
+
+
+    }
+
+    function handleClick() {
+
+
+
+        let usersesh_list = []
+        fetch('/api/us')
+        .then(r => r.json())
+        .then(data => {
+            // usersesh_list array has a list of all usersession instances which are associated with this user
+            for (const each in data) {
+                if (data[each].user_id === user.id) {
+                    usersesh_list.push(data[each])
+                }
+            }
+            //session_list array has ids of all sessions from previous array
+            let session_list = []
+            for (const each in usersesh_list) {
+                session_list.push(usersesh_list[each].session_id)
+            }
+
+            if (session_list.includes(currentSession.id)) {
+                console.log("includes")
+            } else {
+                console.log("does not include")
+            }
+
+        })
+
+    }
+
+    // handleClick()
 
 
     return(
@@ -52,7 +94,7 @@ function SessionPage({ currentSession, setCurrentSession, findPract }) {
         <>
         <main id="sessionpage-container">
             <h3>{currentSession.title} with {findPract(currentSession.practitioner_id)}</h3>
-            <button id="addtomysparks-btn">Add to My Sparks</button>
+            <button id="addtomysparks-btn">{inMySparks ? "Remove from My Sparks": "Add to My Sparks"}</button>
             <YouTube videoId={`${getVidId(currentSession.link)}`} options={options}/>
             <div id="sessiondetails-container">
                 <p>{currentSession.text}</p>

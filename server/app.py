@@ -159,6 +159,39 @@ def get_session_categories(id):
         for each in categ_obj_list:
             final_list.append(each.to_dict())
         return final_list, 200
+
+
+@app.route('/us', methods = ["GET", "POST"])
+def usersessions():
+    # print("hello")
+    usersessions = UserSession.query.all()
+
+    if request.method == "GET":
+        try:
+            all_usersesh = []
+            for each in usersessions:
+                all_usersesh.append(each.to_dict())
+            return all_usersesh, 200
+        except Exception as e:
+            print(e)
+    
+    if request.method == "POST":
+        try:
+            data = request.get_json()
+            new_usersesh = UserSession(
+                session_id = data.get("session_id"),
+                user_id = data.get("user_id")
+            )
+            db.session.add(new_usersesh)
+            db.session.commit()
+            return new_usersesh.to_dict(), 201
+        except Exception as e:
+            print(e)
+            return {"error": "unable to add"}, 409
+
+@app.route('/test')
+def test():
+    return {}
     
 
 
@@ -170,14 +203,6 @@ def get_session_categories(id):
 
 
     
-
-
-
-
-
-
-
-
 
 
 

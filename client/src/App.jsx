@@ -55,6 +55,13 @@ function App() {
         }
     }}
 
+    function getVidId(input) {
+      const linkArray = input.split('')
+      const indexToSplit = linkArray.findIndex((item) => item === "=")
+      const vidId = (linkArray.slice(indexToSplit + 1)).join('')
+      return vidId
+  }
+
 
   
 
@@ -73,11 +80,19 @@ function App() {
             categories={categories}
             currentSession={currentSession} 
             setCurrentSession={setCurrentSession}
-            findPract={findPract}/>}/>
+            findPract={findPract}
+            getVidId={getVidId}
+            />}/>
             <Route path="/sessions">
-              <Route path=":sessionid" element={<SessionPage sessions={sessions} setSessions={setSessions} currentSession={currentSession} setCurrentSession={setCurrentSession} findPract={findPract}/>}/>
+              <Route path=":sessionid" element={<SessionPage 
+              currentSession={currentSession} 
+              setCurrentSession={setCurrentSession} 
+              findPract={findPract}
+              getVidId={getVidId}
+              user={user}
+              />}/>
             </Route>
-            <Route path="/mysparks" element={<MySparks user={user} sessions={sessions} findPract={findPract}/>}/>
+            <Route path="/mysparks" element={<MySparks user={user} sessions={sessions} findPract={findPract} getVidId={getVidId}/>}/>
             <Route path="/users" element={<MyProfile user={user} setUser={setUser}/>}/>
 
       </Routes> 

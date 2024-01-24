@@ -27,7 +27,7 @@ def create_sessions():
         new_sesh = Session(
             title = f"{fake.word()} {fake.word()} {fake.word()}",
             link = "https://www.youtube.com/watch?v=NNL2klXs3tc",
-            practitioner_id = fake.random_int(min=0, max=10),
+            practitioner_id = fake.random_int(min=1, max=10),
             text = fake.paragraph()
         )
         db.session.add(new_sesh)
@@ -57,8 +57,8 @@ def create_categories():
 def create_sesh_cate():
     for each in range(25):
         new = SessionCategory(
-            session_id = fake.random_int(min=0, max=10),
-            category_id = fake.random_int(min=0, max=5)
+            session_id = fake.random_int(min=1, max=10),
+            category_id = fake.random_int(min=1, max=5)
         )
         db.session.add(new)
         db.session.commit()
@@ -67,8 +67,8 @@ def create_sesh_cate():
 def create_user_sesh():
     for each in range(20):
         new = UserSession(
-            user_id = fake.random_int(min=0, max=10),
-            session_id = fake.random_int(min=0, max=10)
+            user_id = fake.random_int(min=1, max=10),
+            session_id = fake.random_int(min=1, max=10)
         )
         db.session.add(new)
         db.session.commit()

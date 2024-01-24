@@ -84,7 +84,7 @@ def sessions():
     if request.method == "GET":
         all_sessions = []
         for each in sessions:
-            all_sessions.append(each.to_dict(rules=('-users', '-categories',)))
+            all_sessions.append(each.to_dict(rules=('-users', )))
         return all_sessions, 200
     
 @app.route('/practitioners', methods = ["GET"])
@@ -147,7 +147,51 @@ def user_by_id(id):
             return user.to_dict(), 200
         except:
             return {"error": "unable to edit"}, 304
+        
+@app.route('/sessions/<int:id>/categories', methods = ["GET"])
+def get_session_categories(id):
+    # session = Session.query.filter(Session.id == id).first()
+    sesh_categ_list = SessionCategory.query.filter(SessionCategory.session_id == id).all()
+    print(sesh_categ_list)
     
+
+    if request.method == "GET":
+        categories = []
+        for each in sesh_categ_list:
+            categories.append(each.category_id)
+        categ_id_list = set(categories)
+        categ_obj_list = []
+        for each in categ_id_list:
+            category = Category.query.filter(Category.id == each).first()
+            categ_obj_list.append(category)
+        final_list = []
+        for each in categ_obj_list:
+            final_list.append(each.to_dict())
+        return final_list, 200
+    
+
+@app.route('/categories/<int:id>/sessions', methods = ["GET"])
+def get_category_sessions(id):
+    categ_sesh_list = SessionCategory.query.filter(SessionCategory.category_id == id).all()
+    print(categ_sesh_list)
+
+    if request.method == "GET":
+        sessions = []
+        for each in categ_sesh_list:
+            sessions.append(each.session_id)
+        sesh_id_list = set(sessions)
+        sesh_obj_list = []
+        for each in sesh_id_list:
+            session = Session.query.filter(Session.id == each).first()
+            sesh_obj_list.append(session)
+        final_list = []
+        for each in sesh_obj_list:
+            final_list.append(each.to_dict('-users',))
+        return final_list, 200
+
+
+    
+
 
 
 

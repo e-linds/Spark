@@ -6,69 +6,69 @@ import SortButton from './SortButton.jsx'
 
 
 function Library({ sessions, practitioners, setCurrentSession, findPract, categories }) {
-    const [sortCategories, setSortCategories] = useState({})
+    const [sortCategories, setSortCategories] = useState([])
+    const [displaySessions, setDisplaySessions] = useState(sessions)
 
-    function create_dict(input) {
-        let all_categ = {}
-        input.map((each) => {
-            all_categ[each.name] = false
-        })
-        setSortCategories(all_categ)
-        return all_categ
-    }
+
 
 
     useEffect(() => {
-        create_dict(categories)
+        setDisplaySessions(sessions)
     }, [])
 
-    // let sessioncategories = []
-
-    // useEffect(() => {
-        // fetch session categories - I'm not sure whether there's a better way to do this? 
-    //     fetch('/api/sessioncategories')
-    //     .then(r => r.json())
-    //     .then(data => sessioncategories = [data])
-    // })
+    
 
 
     function buttonChange(input) {
 
-        let new_dict = sortCategories
+        let array = sortCategories
 
-        if (sortCategories[input] === true) {
+        if (array.includes(input)) {
 
-            new_dict[input] = false
-            setSortCategories(new_dict)
+            const indexToRemove = array.indexOf(input)
+            array.splice(indexToRemove, 1)
             
-        } else if (sortCategories[input] === false) {
+            setSortCategories(array)
+        
+            
+        } else if (array.includes(input) === false) {
 
-            new_dict[input] = true
-            setSortCategories(new_dict)
-
-        }}
+            array.push(input)
+            setSortCategories(array)
+        
+        }
+        filterSessions()
+    }
 
         
-// in the middle of figuring out how to get a list of categories for each session - might need to call sessioncategory join table?
-        // function sortSessions() {
-        //     console.log(sessioncategories)
 
-        //     sessioncategories.map((each) => {
-        //         console.log(each.session_id)
-        //     })
-            // let filtered_sessions = []
-            // console.log(sessions.filter((each) => {
-            //     const session_categ = each.category
-            //     console.log(session_categ)
-            //     if (sortCategories[session_categ] === true) {
-            //         return true
-            //     } 
-            // }))
-            // console.log(newarray)
-        // }
-        console.log(sortCategories)
-        // sortSessions()
 
+
+    function filterSessions() {
+       
+
+        let array = sortCategories
+
+        let sessionfilter = sessions.filter((each) => {
+
+            for (const categ in each.categories) {
+                const name = (each.categories[categ].category.name)
+                if (array.includes(name)) {
+                    return true
+                }}
+
+            return false
+    
+        })
+        console.log(sessionfilter)
+        if (sessionfilter.length > 0) {
+            setDisplaySessions(sessionfilter)
+        } else {
+            setDisplaySessions(sessions)
+        }
+    
+
+    }
 
     
     return(
@@ -90,7 +90,7 @@ function Library({ sessions, practitioners, setCurrentSession, findPract, catego
                 </div>
             </div>
             <div id="sessionblocks-container">
-                {sessions ? sessions.map((each) => {
+                {displaySessions ? displaySessions.map((each) => {
                     return <SessionBlock
                         key={each.id}
                         id={each.id}
@@ -102,7 +102,7 @@ function Library({ sessions, practitioners, setCurrentSession, findPract, catego
                     />   
                 })
                 :
-                <p>no sessions to load</p>
+                <p>no sessions to display</p>
             }
             </div>
             <h2>Featured Practitioners</h2>

@@ -37,6 +37,7 @@ function MyProfile({ user, setUser }) {
             user.name = data.name
             user.email = data.email
             user.job = data.job
+            setUser(data)
         })
 
 

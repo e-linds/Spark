@@ -16,7 +16,7 @@ function SortButton({ name, sortCategories, setSortCategories, buttonChange }) {
 
     return (
         <>
-        <button id="categorybtn" onClick={() => handleClick()}>{name}</button>
+        <button id="categorybtn" onClick={() => handleClick()} style={{background: clicked ? "#08769B" :"#fed8b1"}}>{name}</button>
         </>
     )
 }

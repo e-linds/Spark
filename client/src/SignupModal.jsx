@@ -47,7 +47,7 @@ function SignupModal({ user, setUser}) {
 <div>
     <button class="openingpagebutton" onClick={handleClickOpen}>Create Account</button>
     <Dialog id="loginmodal" onClose={handleClickClose} open={openDialog}>
-            <form type="submit" className="signup" onSubmit={handleSubmit}>
+            <form className="opening-form" type="submit"  onSubmit={handleSubmit}>
                 <input name="name" placeholder="Name"></input>
                 <br></br>
                 <input name="email" placeholder="Email"></input>

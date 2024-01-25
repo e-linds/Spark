@@ -1,4 +1,4 @@
-import { useInRouterContext } from 'react-router-dom'
+import { useInRouterContext, Link } from 'react-router-dom'
 import SessionBlock from './SessionBlock.jsx'
 import { useEffect, useState } from 'react'
 
@@ -46,6 +46,11 @@ function MySparks({ sessions, findPract, user, getVidId, mySparks, refresh, setR
                             getVidId={getVidId}
                         />   
                     })}
+                    <Link id="browselink" to='/library'>
+                        <article id="sessionblock" class="section" >+
+                            {/* <p>hello</p> */}
+                        </article>
+                    </Link>
                     </div>
                 :
                 <div>No Sparks to display. Head to Library to start saving.</div>

@@ -21,7 +21,6 @@ function SessionBlock({ title, link, practitioner, id, self, setCurrentSession, 
         <Link to={`/sessions/${id}`}>
             <article id="sessionblock" class="section" style={articleStyling} onClick={() => setCurrentSession(self)}>
                 <p id="sessionblock-text">{title}: {practitioner}</p>
-                {/* <img src={image} /> */}
             </article>
         </Link>
         </>

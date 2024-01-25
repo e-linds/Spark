@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import DeleteUserModal from './DeleteUserModal.jsx'
+import { Link } from 'react-router-dom'
 
 
 function MyProfile({ user, setUser }) {
     const [edit, setEdit] = useState(false)
+    const [clicked, setClicked] = useState(false)
 
-    function handleClick() {
+    function handleEditClick() {
         setEdit(!edit)
     }
 
@@ -43,40 +45,50 @@ function MyProfile({ user, setUser }) {
     }
 
 
+    function handleClick() {
+        setClicked(!clicked)
+    }
+
+
     return(
         <>
-        <div id="profilepage-header">
-            <h2>My Profile</h2>
-            <div className="dropdown">
-                <button id="ellipsesbtn">&#8230;</button>
-                <div className="dropdown-content">
-                    <span onClick={() => handleClick()}>Edit Profile</span>
-                    <DeleteUserModal user={user} setUser={setUser}/>
-                    <span>Go to My Sparks</span>
-                </div>
-            </div>
-        </div>
         <div id="profilepage-container">
-            {edit ? 
-            <div>
-                <form className="editprofile-form" onSubmit={handleSubmit}>
-                    <input name="name" placeholder={`${user.name}`}></input>
-                    <br></br>
-                    <input name="email" placeholder={`${user.email}`}></input>
-                    <br></br>
-                    <input name="job" placeholder={`${user.job ? user.job : "Job"}`}></input>
-                    <br></br>
-                    <button type="submit">Submit</button>
-                </form>
+            <div id="profilepage-infoside">
+                <div id="titleandbutton">
+                    <h2>My Profile</h2>
+                    <button id="ellipsesbtn" onClick={handleClick}>...</button>
+                        {clicked ? 
+                        <div className="dropdown-content">
+                            <span onClick={() => handleEditClick()}>Edit Profile</span>
+                            <DeleteUserModal user={user} setUser={setUser}/>
+                            <Link to="/mysparks">Go to My Sparks</Link>
+                        </div>
+                        :
+                        null
+                        }
+                </div>
+                {edit ? 
+                <div>
+                    <form className="editprofile-form" onSubmit={handleSubmit}>
+                        <input name="name" placeholder={`${user.name}`}></input>
+                        <br></br>
+                        <input name="email" placeholder={`${user.email}`}></input>
+                        <br></br>
+                        <input name="job" placeholder={`${user.job ? user.job : "Job"}`}></input>
+                        <br></br>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                :
+                <div>
+                    <p><strong>Name</strong> {user.name}</p>
+                    <p><strong>Email</strong> {user.email}</p>
+                    <p><strong>Job</strong> {user.job}</p>
+                </div>
+                }
+                
             </div>
-            :
-            <div>
-                <p><strong>Name</strong> {user.name}</p>
-                <p><strong>Email</strong> {user.email}</p>
-                <p><strong>Job</strong> {user.job}</p>
-            </div>
-            }
-            
+            <img id="profilepage-image" src="https://assets.classicfm.com/2018/06/mirga-grazinyte-tyla-1518615696.jpg"/>    
         </div>
         </>
     )

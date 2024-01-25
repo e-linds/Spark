@@ -53,7 +53,7 @@ function LoginModal({ stay, setStay, user, setUser }) {
 <div>
     <button class="openingpagebutton" onClick={handleClickOpen}>Login</button>
     <Dialog id="loginmodal" onClose={handleClickClose} open={openDialog}>
-            <form type="submit" class="login" onSubmit={handleSubmit}>
+            <form className="opening-form" type="submit" onSubmit={handleSubmit}>
                 <input name="email" placeholder="Email"></input>
                 <br></br>
                 <input name="password" placeholder="Password"></input>

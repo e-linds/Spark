@@ -143,7 +143,6 @@ def user_by_id(id):
 def get_session_categories(id):
     # session = Session.query.filter(Session.id == id).first()
     sesh_categ_list = SessionCategory.query.filter(SessionCategory.session_id == id).all()
-    print(sesh_categ_list)
     
 
     if request.method == "GET":
@@ -167,13 +166,12 @@ def usersessions():
     usersessions = UserSession.query.all()
 
     if request.method == "GET":
-        try:
             all_usersesh = []
             for each in usersessions:
                 all_usersesh.append(each.to_dict())
             return all_usersesh, 200
-        except Exception as e:
-            print(e)
+       
+        
     
     if request.method == "POST":
         try:
@@ -185,13 +183,28 @@ def usersessions():
             db.session.add(new_usersesh)
             db.session.commit()
             return new_usersesh.to_dict(), 201
-        except Exception as e:
-            print(e)
+        except:
             return {"error": "unable to add"}, 409
 
 @app.route('/test')
 def test():
     return {}
+
+
+@app.route('/usersessions/<int:id>', methods = ["GET", "PATCH", "DELETE"])
+def usersessions_by_id(id):
+    usersession = UserSession.query.filter(UserSession.id == id).first()
+
+    if request.method == "DELETE":
+        try:
+            db.session.delete(usersession)
+            db.session.commit()
+            return {"status": "deleted"}, 204
+        except:
+            return {"error": "unable to delete"}, 400
+
+
+
     
 
 

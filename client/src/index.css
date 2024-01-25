@@ -1,5 +1,7 @@
 :root {
   --primary: #fb8c00;
+  font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto Mono', monospace;
 }
 
 body {
@@ -131,7 +133,7 @@ button:hover {
 
 }
 
-#addtomysparks-btn {
+.addtomysparks-btn {
   width: 120px;
   height: 70px;
   padding: 0;

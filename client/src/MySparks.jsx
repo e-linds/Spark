@@ -2,40 +2,40 @@ import { useInRouterContext } from 'react-router-dom'
 import SessionBlock from './SessionBlock.jsx'
 import { useEffect, useState } from 'react'
 
-function MySparks({ sessions, findPract, user, getVidId }) {
-    const [displaySessions, setDisplaySessions] = useState([])
+function MySparks({ sessions, findPract, user, getVidId, mySparks, refresh, setRefresh }) {
+    // const [displaySessions, setDisplaySessions] = useState([])
+
+    useEffect(() => {
+       console.log("hello") 
+        setRefresh(!refresh)
+    }, [])
 
 
-function getMySparks() {
+// function getMySparks() {
 
-    const main_user = user
+//     const main_user = user
     
-    let sessionfilter = sessions.filter((each) => {
+//     let sessionfilter = sessions.filter((each) => {
 
-        for (const person in each.users) {
-            if (each.users[person].user.id === main_user.id ) {
-                return true
-            }}
+//         for (const person in each.users) {
+//             if (each.users[person].user.id === main_user.id ) {
+//                 return true
+//             }}
 
-        return false
-    })
+//         return false
+//     })
 
-    setDisplaySessions(sessionfilter)
+//     setDisplaySessions(sessionfilter)
 
-}
-
-useEffect(() => {
-    getMySparks()
-}, [])
-
+// }
 
 
     return(
         <>
         <h2>My Sparks</h2>
-                {displaySessions ? 
+                {mySparks ? 
                     <div className="sessionblocks-container">
-                        {displaySessions.map((each) => {
+                        {mySparks.map((each) => {
                         return <SessionBlock
                             key={each.id}
                             id={each.id}

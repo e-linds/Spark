@@ -58,8 +58,7 @@ function Library({ sessions, practitioners, setCurrentSession, findPract, catego
        <>
         <main id="library-container">
             <div id="librarysessions-title">
-                <h2>All Sessions</h2>
-                
+                <h2>All Sessions</h2>                
                 <div id="sortbuttons-container">
                     <p>Sort By:</p>
                     {categories.map((each) => {

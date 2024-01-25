@@ -102,7 +102,7 @@ function App() {
       <>
       <Header user={user} setUser={setUser} setCurrentTab={setCurrentTab}/>
       <Routes>
-            <Route path="/library" element={<Library 
+            <Route path="/home" element={<Library 
             sessions={sessions} 
             practitioners={practitioners} 
             categories={categories}
@@ -141,8 +141,8 @@ function App() {
       </>
       :
       <Routes>
-            <Route path="/library" element={<Opening stay={stay} setStay={setStay} user={user} setUser={setUser}/>}/>
-            <Route path="*" element={<Navigate to="/library" />} />
+            <Route path="/home" element={<Opening stay={stay} setStay={setStay} user={user} setUser={setUser}/>}/>
+            <Route path="*" element={<Navigate to="/home" />} />
       </Routes>  
       } 
     </BrowserRouter>

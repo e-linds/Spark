@@ -40,19 +40,22 @@ function MyProfile({ user, setUser }) {
             user.job = data.job
             setUser(data)
         })
-
-
     }
-
-    //all this above is almost totally working except the welcome message on top in the header component does not receive the new user name
-
-
-
 
 
     return(
         <>
-        <h2>My Profile</h2>
+        <div id="profilepage-header">
+            <h2>My Profile</h2>
+            <div className="dropdown">
+                <button id="ellipsesbtn">&#8230;</button>
+                <div className="dropdown-content">
+                    <span onClick={() => handleClick()}>Edit Profile</span>
+                    <DeleteUserModal user={user} setUser={setUser}/>
+                    <span>Go to My Sparks</span>
+                </div>
+            </div>
+        </div>
         <div id="profilepage-container">
             {edit ? 
             <div>
@@ -73,14 +76,7 @@ function MyProfile({ user, setUser }) {
                 <p><strong>Job</strong> {user.job}</p>
             </div>
             }
-            <div className="dropdown">
-                <button id="ellipsesbtn">&#8230;</button>
-                <div className="dropdown-content">
-                    <span onClick={() => handleClick()}>Edit Profile</span>
-                    <DeleteUserModal user={user} setUser={setUser}/>
-                    <span>Go to My Sparks</span>
-                </div>
-            </div>
+            
         </div>
         </>
     )

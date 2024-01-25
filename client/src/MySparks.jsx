@@ -32,7 +32,7 @@ function MySparks({ sessions, findPract, user, getVidId, mySparks, refresh, setR
 
     return(
         <>
-        <h2>My Sparks</h2>
+        <h2 id='mysparks-title'>My Sparks</h2>
                 {mySparks ? 
                     <div className="sessionblocks-container">
                         {mySparks.map((each) => {

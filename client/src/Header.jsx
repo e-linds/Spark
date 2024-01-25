@@ -29,7 +29,7 @@ function Header({ user, setUser, setCurrentTab }) {
       <img src='./sparklogo.png' title="Spark Mindful Artistry" id="headerlogo"/>
       {/* <h1>Welcome, {user.name}!</h1>  */}
       <div id="header-details">
-          <Link className="headerlinks" id="library" to="/library">Library</Link>
+          <Link className="headerlinks" id="library" to="/home">Library</Link>
           <Link className="headerlinks" id="mysparks" to="/mysparks">My Sparks</Link>
           <Link className="headerlinks" id="myprofile" to="/users/">My Profile</Link>
           <button id="logoutbtn" onClick={handleClick} href="/library">Logout</button>

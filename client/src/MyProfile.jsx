@@ -41,6 +41,8 @@ function MyProfile({ user, setUser }) {
             user.email = data.email
             user.job = data.job
             setUser(data)
+            setEdit(!edit)
+            // setClicked(!clicked)
         })
     }
 

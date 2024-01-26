@@ -54,63 +54,64 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
             
     }
 
-    function addtoMySparks() {
-        // setButtonReady(false)
-        // add usersession instance - post
-
+    function handleClick() {
         // setRefresh(!refresh)
 
-        const new_usersesh = {
-            session_id: currentSession.id,
-            user_id: user.id
-        }
 
-        // let firstInstance = true
+        if (inMySparks === false) {
 
-        // for (const each in userSessionList) {
-        //     if (userSessionList[each].session_id === currentSession.id && userSessionList[each].user_id === user.id) {
-        //         firstInstance = false
-        //     }
-        // }
-
-        // console.log(firstInstance)
-
-        fetch('/api/us', {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json"
-            },
-            body: JSON.stringify(new_usersesh)
-        })
-        .then(r => r.json())
-        .then(data => {
-            console.log(data)
-
-            let usersesh_list = []
-            console.log(data)
+            //add to mysparks
             
-            for (const each in data) {
-                if (data[each].user_id === user.id) {
-                    usersesh_list.push(data[each])  
-                }}
-                setUserSessionList(usersesh_list)
-                console.log(usersesh_list)
-                console.log("successfully added")
+            const new_usersesh = {
+                session_id: currentSession.id,
+                user_id: user.id
+            }
+    
+           
+            fetch('/api/us', {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify(new_usersesh)
+            })
+            .then(r => r.json())
+            .then(data => {
+                console.log(data)
 
-                // setRefresh(!refresh)
-            // setButtonReady(true)
-                setInMySparks(true)
-        })
-            
-    }
+                let usersesh_list = []
+                
+                console.log(data)
+                
+                for (const each in data) {
+                    if (data[each].user_id === user.id) {
+                        usersesh_list.push(data[each])  
+                    }}
+                    setUserSessionList(usersesh_list)
+                    console.log(usersesh_list)
+                    console.log("successfully added")
 
-    console.log(userSessionList)
+                    let session_list = []
+                    for (const each in usersesh_list) {
+                    session_list.push(usersesh_list[each].session)
+                }
+                    setMySparks(session_list)
+                    setInMySparks(true)
+                
+    
+                    // setRefresh(!refresh)
+                // setButtonReady(true)
+          
+            })
+
+    
 
 
-    function removefromMySparks() {
-        // setButtonReady(false)
-        //remove user session instance - delete
+        } else if (inMySparks === true) {
 
+            //remove from mysparks
+
+            console.log(userSessionList)
 
         let this_usersesh_id = ""
        
@@ -131,7 +132,24 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
         })
         .then(response => {})
         .then(data => {
-            
+
+            const array = userSessionList
+
+            for (const each in array) {
+                if (array[each].id === this_usersesh_id) {
+                    const index = (array.indexOf(array[each]))
+                    array.splice(index, 1)
+                    setUserSessionList(array)
+
+                    let session_list = []
+                    for (const each in array) {
+                    session_list.push(array[each].session)
+                }
+                    setMySparks(session_list)
+                }
+            }
+
+                   
             // setRefresh(!refresh)
             // setButtonReady(true)
             setInMySparks(false)
@@ -139,21 +157,59 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
 
         })
     }
-
-    }
-
-    function handleClick() {
-        // setRefresh(!refresh)
-        if (inMySparks === true) {
-            removefromMySparks()
-
             
-        } else if (inMySparks === false) {
-            addtoMySparks()
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
         // checkMySparks()
 
     }
+
+
+
+
+
+
+
+
+
+    // function addtoMySparks() {
+      
+
+        
+            
+    // }
+
+    console.log(userSessionList)
+
+
+    // function removefromMySparks() {
+    //     // setButtonReady(false)
+    //     //remove user session instance - delete
+
+
+        
+
+    // }
+
+   
 
     
     //embedded youtube video details

@@ -46,7 +46,7 @@ function MySparks({ sessions, findPract, user, getVidId, mySparks, refresh, setR
                             getVidId={getVidId}
                         />   
                     })}
-                    <Link id="browselink" to='/library'>
+                    <Link id="browselink" to='/home'>
                         <article id="sessionblock" class="section" >+
                             {/* <p>hello</p> */}
                         </article>

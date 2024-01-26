@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 import SessionBlock from "./SessionBlock"
 import SortButton from './SortButton.jsx'
+import PractitionerBlock from './PractitionerBlock.jsx'
 
 
 
@@ -89,6 +90,17 @@ function Library({ sessions, practitioners, setCurrentSession, findPract, catego
             }
             </div>
             <h2>All Practitioners</h2>
+            {practitioners ? practitioners.map((each) => {
+                    return <PractitionerBlock
+                        key={each.id}
+                        id={each.id}
+                        name={each.name}
+                        self={each}
+                    />   
+                })
+                :
+                <p>no practitioners to display</p>
+            }
 
 
         </main>

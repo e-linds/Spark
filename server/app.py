@@ -211,6 +211,20 @@ def usersessions_by_id(id):
             return all, 204
         except:
             return {"error": "unable to delete"}, 400
+        
+
+@app.route('/practitioners/<int:id>/sessions', methods = ["GET"])
+def practioner_sessions(id):
+    sessions = Session.query.filter(Session.practitioner_id == id).all()
+
+    if request.method == "GET":
+        practs_sessions = []
+        for each in sessions:
+            practs_sessions.append(each.to_dict(rules=('-users', '-categories',)))
+        return practs_sessions, 200
+        
+
+
 
 
 

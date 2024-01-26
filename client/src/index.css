@@ -3,13 +3,21 @@
   font-family: None;
   font-family: 'PT Sans', sans-serif;
   font-family: 'Roboto Mono', monospace;
+  --text-decoration: none
   
 }
+
+:root:hover {
+  --text-decoration: none
+}
+/* :root button {
+  border: none
+} */
 
 body {
   padding: 20px;
   margin-left: 20px;
-  max-width: 1600px;
+  max-width: 2000px;
   --primary: #fed8b1;
   --secondary: #ff8b3d;
   font-family: 'PT Sans', sans-serif;
@@ -102,7 +110,7 @@ button:hover {
 
 #categorybtn {
   font-size: 15px;
-  height: 30px;
+  height: 50px;
   max-width: 120px;
   padding: 0px
 
@@ -129,12 +137,15 @@ button:hover {
 
 #sessionblock-text {
   text-wrap: wrap;
-  color: #08769b;
-  background: #d3d3d3;
+  color: white;
+  background: var(--primary);
   padding: 3px 5px;
   border-radius: 3px
-  
 
+}
+
+#sessionblock-text:hover {
+  color: var(--secondary)
 }
 
 #sessionblock img {
@@ -173,7 +184,7 @@ button:hover {
 
 .categorytag {
   display: grid;
-  width: 80px;
+  width: 120px;
   height: 50px;
   font-size: 15px;
   margin: 10px;
@@ -288,6 +299,25 @@ button:hover {
   width: 40%
 
 }
+
+#deleteaccountmodal div {
+  padding: 15px;
+  display: grid;
+  
+}
+
+#deleteaccountmodal h2 {
+  font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto Mono', monospace;
+
+}
+
+#deleteaccountmodal * {
+  font-size: 20px;
+  
+
+}
+
 
 
 

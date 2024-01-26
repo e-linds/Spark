@@ -30,11 +30,11 @@ function DeleteUserModal({ user, setUser, clicked, setClicked }) {
     return(
         <>
         <span onClick={handleClickOpen}>Delete Account</span>
-        <Dialog id="loginmodal" onClose={handleClickClose} open={openDialog}>
-            <h2>Are you sure you'd like to delete your account? Look at all the fun you'll be missing...</h2>
+        <Dialog id="deleteaccountmodal" onClose={handleClickClose} open={openDialog}>
             <div>
+                <h2>Are you sure you'd like to delete your account?</h2>
                 <button onClick={handleDelete}>Yes, I'm sure</button>
-                <button onClick={() => {handleClickClose, setClicked(!clicked)}}>No, never mind</button>
+                <button onClick={() => {handleClickClose, setClicked(!clicked)}}>Oops, never mind</button>
             </div>
         </Dialog>
         </>

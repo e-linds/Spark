@@ -7,7 +7,7 @@ import SortButton from './SortButton.jsx'
 
 function Library({ sessions, practitioners, setCurrentSession, findPract, categories, getVidId }) {
     const [sortCategories, setSortCategories] = useState([])
-    const [displaySessions, setDisplaySessions] = useState(sessions)
+    const [displaySessions, setDisplaySessions] = useState([])
 
 
     useEffect(() => {

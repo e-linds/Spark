@@ -182,7 +182,12 @@ def usersessions():
             )
             db.session.add(new_usersesh)
             db.session.commit()
-            return new_usersesh.to_dict(), 201
+            #specifically want to return the whole array, not just the one object
+            all = []
+            usersessions_new = UserSession.query.all()
+            for each in usersessions_new:
+                all.append(each.to_dict())
+            return all, 201
         except:
             return {"error": "unable to add"}, 409
 
@@ -199,7 +204,11 @@ def usersessions_by_id(id):
         try:
             db.session.delete(usersession)
             db.session.commit()
-            return {"status": "deleted"}, 204
+            usersessions = UserSession.query.all()
+            all = []
+            for each in usersessions:
+                all.append(each.to_dict())
+            return all, 204
         except:
             return {"error": "unable to delete"}, 400
 

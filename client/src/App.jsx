@@ -55,17 +55,19 @@ function App() {
     fetch('/api/us')
     .then(r => r.json())
     .then(data => {
-            let usersesh_list = []
 
             if (user) {
+
+              let usersesh_list = []
+              console.log("adding from app")
             
                 // usersesh_list array has a list of all usersession instances which are associated with this user
                 for (const each in data) {
                     if (data[each].user_id === user.id) {
                         usersesh_list.push(data[each])  
                     }}
-                console.log(usersesh_list)
-                setUserSessionList(usersesh_list)
+                  setUserSessionList(usersesh_list)     
+
                 //session_list array has ids of all sessions from above array
                 let session_list = []
                 for (const each in usersesh_list) {
@@ -77,7 +79,14 @@ function App() {
 
           })
 
-  }, [user, refresh])
+  }, [user])
+
+  function getUSId(array, sessionidinput) {
+    for (const each in array) {
+      if (array[each].session_id === sessionidinput) {
+        return array.id
+      }}
+  }
 
   function findPract(input) {
     for (const each of practitioners) {
@@ -120,6 +129,7 @@ function App() {
               user={user}
               mySparks={mySparks}
               setMySparks={setMySparks}
+              setUserSessionList={setUserSessionList}
               userSessionList={userSessionList}
               refresh={refresh}
               setRefresh={setRefresh}

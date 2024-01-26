@@ -59,8 +59,8 @@ function MyProfile({ user, setUser }) {
                     <button id="ellipsesbtn" onClick={handleClick}>...</button>
                         {clicked ? 
                         <div className="dropdown-content">
-                            <span onClick={() => handleEditClick()}>Edit Profile</span>
-                            <DeleteUserModal user={user} setUser={setUser}/>
+                            <span onClick={() => {handleEditClick(), setClicked(!clicked)}}>Edit Profile</span>
+                            <DeleteUserModal user={user} setUser={setUser} clicked={clicked} setClicked={setClicked}/>
                             <Link to="/mysparks">Go to My Sparks</Link>
                         </div>
                         :
@@ -75,8 +75,9 @@ function MyProfile({ user, setUser }) {
                         <input name="email" placeholder={`${user.email}`}></input>
                         <br></br>
                         <input name="job" placeholder={`${user.job ? user.job : "Job"}`}></input>
-                        <br></br>
+                        <br></br>                        
                         <button type="submit">Submit</button>
+                        <button onClick={() => setEdit(!edit)}>Cancel</button>
                     </form>
                 </div>
                 :
@@ -84,6 +85,7 @@ function MyProfile({ user, setUser }) {
                     <p><strong>Name</strong> {user.name}</p>
                     <p><strong>Email</strong> {user.email}</p>
                     <p><strong>Job</strong> {user.job}</p>
+                    <img id="profilepic" src={user.image_url ? user.image_url : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"}/>
                 </div>
                 }
                 

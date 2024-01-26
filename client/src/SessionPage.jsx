@@ -4,7 +4,7 @@ import { json, useParams } from 'react-router-dom';
 
 
 
-function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, user, mySparks, setMySparks, userSessionList, refresh, setRefresh }) {
+function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, user, mySparks, setMySparks, setUserSessionList, userSessionList, refresh, setRefresh }) {
     const [sessionCategories, setSessionCategories] = useState([])
     const [inMySparks, setInMySparks] = useState(null)
     const [buttonReady, setButtonReady] = useState(true)
@@ -18,7 +18,7 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
         fetch(`/api/sessions/${ sessionid }`)
         .then(r => r.json())
         .then(data => setCurrentSession(data))
-        }, [userSessionList]
+        }, []
     )
 
     useEffect(() => {
@@ -41,7 +41,7 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
                 setInMySparks(false)
             }
             
-        }}, [mySparks, userSessionList, refresh])
+        }}, [])
 
 
     function checkMySparks() {
@@ -55,10 +55,10 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
     }
 
     function addtoMySparks() {
-        setButtonReady(false)
+        // setButtonReady(false)
         // add usersession instance - post
 
-        setRefresh(!refresh)
+        // setRefresh(!refresh)
 
         const new_usersesh = {
             session_id: currentSession.id,
@@ -84,15 +84,31 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
         })
         .then(r => r.json())
         .then(data => {
-            setRefresh(!refresh)
-            setButtonReady(true)})
-            setInMySparks(true)
+            console.log(data)
+
+            let usersesh_list = []
+            console.log(data)
+            
+            for (const each in data) {
+                if (data[each].user_id === user.id) {
+                    usersesh_list.push(data[each])  
+                }}
+                setUserSessionList(usersesh_list)
+                console.log(usersesh_list)
+                console.log("successfully added")
+
+                // setRefresh(!refresh)
+            // setButtonReady(true)
+                setInMySparks(true)
+        })
             
     }
 
+    console.log(userSessionList)
+
 
     function removefromMySparks() {
-        setButtonReady(false)
+        // setButtonReady(false)
         //remove user session instance - delete
 
 
@@ -107,14 +123,19 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
         if (this_usersesh_id) {
 
         fetch(`/api/usersessions/${this_usersesh_id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: {}
         })
-        .then(r => {})
+        .then(response => {})
         .then(data => {
             
-            setRefresh(!refresh)
-            setButtonReady(true)
-            console.log("hello")
+            // setRefresh(!refresh)
+            // setButtonReady(true)
+            setInMySparks(false)
+            console.log("successfully removed")
 
         })
     }
@@ -122,17 +143,15 @@ function SessionPage({ currentSession, setCurrentSession, findPract, getVidId, u
     }
 
     function handleClick() {
-        setRefresh(!refresh)
+        // setRefresh(!refresh)
         if (inMySparks === true) {
             removefromMySparks()
-            setInMySparks(false)
 
             
         } else if (inMySparks === false) {
             addtoMySparks()
-            setInMySparks(true)
         }
-        checkMySparks()
+        // checkMySparks()
 
     }
 

@@ -191,6 +191,7 @@ button:hover {
   background-color: var(--primary);
   color: var(--secondary);
   text-align: center;
+  
 }
 
 /* #browse p {
@@ -233,6 +234,10 @@ button:hover {
 #profilepage-container img {
   margin: 10px;
   border-radius: 7px
+}
+
+#profilepic {
+  height: 200px;
 }
 
 /* .dropdown {

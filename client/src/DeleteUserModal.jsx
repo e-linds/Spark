@@ -3,7 +3,7 @@ import { useState } from "react"
 
 
 
-function DeleteUserModal({ user, setUser }) {
+function DeleteUserModal({ user, setUser, clicked, setClicked }) {
 
     const [openDialog, setOpenDialog] = useState(false)
 
@@ -34,7 +34,7 @@ function DeleteUserModal({ user, setUser }) {
             <h2>Are you sure you'd like to delete your account? Look at all the fun you'll be missing...</h2>
             <div>
                 <button onClick={handleDelete}>Yes, I'm sure</button>
-                <button onClick={handleClickClose}>No, never mind</button>
+                <button onClick={() => {handleClickClose, setClicked(!clicked)}}>No, never mind</button>
             </div>
         </Dialog>
         </>

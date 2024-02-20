@@ -10,8 +10,8 @@ A proxy server (included in the src/vite.config file) is used to run the fronten
 
 ## To run the backend:
 ```
-cd server
 pipenv install && pipenv shell
+cd server
 python app.py
 ```
 ## To run the frontend:
